@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <title>output</title>
+    <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.4.js"></script>
+    <script src="../main.js"></script>
+    <link href="../common.css" rel="stylesheet">
+    <style>
+        #outvdo-panel {
+            float: left;
+            width: calc( 100% - 300px);
+            height: 100%;
+        }
+        
+        #control-panel {
+            float: right;
+            width: 300px;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outvdo-panel">
+
+    </div>
+    <script>
+        window.open("control.html", "コントロール", "resizable,scrollbars,status");
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>control</title>
+    <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.4.js"></script>
+    <script src="../main.js"></script>
+    <link href="../common.css" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <div id="control-panel">
+            <h2>Join a room:</h2>
+            <input type="text" title="RoomName" id="room-name">
+            <input type="button" title="JoinRoom" value="join" id="btn-join">
+            <input type="button" title="LeaveRoom" value="leave" id="btn-leave">
+            <p id="connected" class="hide">connected</p>
+            <p id="disconnected" class="show">disconnected</p>
+        </div>
+        <div id="outvdo-panel">
+
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('btn-join').onclick = () => {
+            join(document.getElementById('room-name').value);
+        };
+        document.getElementById('btn-leave').onclick = () => {
+            room.close();
+        };
+    </script>
+</body>
+
+</html>

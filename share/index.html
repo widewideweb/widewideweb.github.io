@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.4.js"></script>
+    <script src="../main.js"></script>
+    <link href="../common.css" rel="stylesheet">
+    <title>share</title>
+    <style>
+        #left {
+            float: left;
+            width: calc( 100% - 300px);
+            height: 100%;
+            padding: 30px;
+            min-height: 450px;
+        }
+        
+        #right {
+            float: right;
+            width: 300px;
+            height: 100%;
+            padding: 30px;
+        }
+        
+        #top {
+            height: 100px;
+        }
+        
+        #top * {
+            display: inline;
+        }
+        
+        #bottom {
+            height: calc( 100% - 100px);
+        }
+        
+        .btn-share {
+            width: 100%;
+            height: 100px;
+        }
+        
+        #vdo-control {
+            height: 100%;
+        }
+        
+        @media screen and ( max-width: 1024px) {
+            html,
+            body {
+                overflow: auto;
+            }
+            #left,
+            #right {
+                float: unset;
+                width: 100%;
+            }
+            #left {
+                height: calc( 100% - 150px);
+            }
+            #right {
+                height: 150px;
+                padding-top: 30px;
+            }
+            #top h2 {
+                display: block;
+            }
+            .btn-share {
+                width: 50%;
+                height: 100%;
+            }
+            #vdo-control {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #vdo-control h2 {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <div id="left">
+            <div id="top">
+                <h2>Join a room:</h2>
+                <input type="text" title="RoomName" id="room-name">
+                <input type="button" title="JoinRoom" id="btn-join" value="Join">
+                <input type="button" title="LeaveRoom" id="btn-leave" value="Leave">
+                <p id="connected" class="hide">connected</p>
+                <p id="disconnected" class="show">disconnected</p>
+            </div>
+            <div id="bottom">
+                <video id="srcvdo" autoplay muted playsinline></video>
+            </div>
+        </div>
+        <div id="right">
+            <div id="vdo-control">
+                <h2>Select to share:</h2>
+                <input title="ShareCam" type="button" value="Cam" id="btn-cam" class="btn-share">
+                <input title="ShareScreen" type="button" value="Screen" id="btn-screen" class="btn-share">
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        shareCam();
+
+        document.getElementById('btn-cam').onclick = () => {
+            shareCam();
+        };
+
+        document.getElementById('btn-screen').onclick = () => {
+            shareScreen();
+        };
+
+        document.getElementById('btn-join').onclick = () => {
+            join(document.getElementById('room-name').value, new MediaStream());
+        };
+
+        document.getElementById('btn-leave').onclick = () => {
+            room.close();
+        };
+    </script>
+</body>
+
+</html>
