@@ -9,7 +9,25 @@
     <script src="../main.js"></script>
     <link href="../common.css" rel="stylesheet">
     <style>
-
+        #control-panel {
+            float: left;
+            width: calc( 100% - 300px);
+            height: 100%;
+        }
+        
+        #preview-panel {
+            float: right;
+            width: 300px;
+            height: 100%;
+        }
+        
+        #preview-panel video {
+            height: auto;
+        }
+        
+        .scrollable {
+            overflow-y: scroll;
+        }
     </style>
 </head>
 
@@ -25,8 +43,11 @@
             <input type="button" title="LeaveRoom" value="leave" id="btn-leave">
             <p id="connected" class="hide">connected</p>
             <p id="disconnected" class="show">disconnected</p>
+            <div id="scenes" class="scrollable">
+
+            </div>
         </div>
-        <div id="outvdo-panel">
+        <div id="preview-panel">
 
         </div>
     </main>

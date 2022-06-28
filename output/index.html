@@ -10,25 +10,54 @@
     <link href="../common.css" rel="stylesheet">
     <style>
         #outvdo-panel {
-            float: left;
-            width: calc( 100% - 300px);
-            height: 100%;
+            position: relative;
         }
         
-        #control-panel {
-            float: right;
-            width: 300px;
-            height: 100%;
+        .over-vdo {
+            position: absolute;
+        }
+        
+        .top {
+            top: 0;
+        }
+        
+        .middle {
+            top: 50%;
+        }
+        
+        .bottom {
+            bottom: 0;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .center {
+            left: 50%;
+        }
+        
+        .right {
+            right: 0;
         }
     </style>
 </head>
 
 <body>
     <div id="outvdo-panel">
-
+        <p class="over-vdo top left">tl</p>
+        <p class="over-vdo top center">tc</p>
+        <p class="over-vdo top right">tr</p>
+        <p class="over-vdo middle left">ml</p>
+        <p class="over-vdo middle center">mc</p>
+        <p class="over-vdo middle right">mr</p>
+        <p class="over-vdo bottom left">bl</p>
+        <p class="over-vdo bottom center">bc</p>
+        <p class="over-vdo bottom right">br</p>
+        <video id="outvdo" autoplay muted playsinline></video>
     </div>
     <script>
-        window.open("control.html", "コントロール", "resizable,scrollbars,status");
+        const controller = window.open("control.html", "コントロール", "resizable,scrollbars,status");
     </script>
 </body>
 
