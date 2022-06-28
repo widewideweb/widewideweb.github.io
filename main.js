@@ -4,6 +4,7 @@ const peer = new Peer({
 });
 
 let room;
+let streams = [];
 
 function join(roomName, localStream) {
 
@@ -22,24 +23,41 @@ function join(roomName, localStream) {
     })
     room.on("stream", async(stream) => {
         // ピアのvideo要素の追加
+        const newVideoPanel = document.createElement("div");
+        newVideoPanel.textContent = stream.peerId;
         const newVideo = document.createElement("video");
         newVideo.srcObject = stream;
         newVideo.playsInline = true;
-        newVideo.classList.add("outvdo");
-        newVideo.setAttribute("peer-id", stream.peerId);
-        newVideo.setAttribute("width", "400px");
-        document.getElementById('outvdo-panel').appendChild(newVideo);
+        newVideo.classList.add("preview");
+        newVideoPanel.appendChild(newVideo);
+        document.getElementById('preview-panel').appendChild(newVideoPanel);
         await newVideo.play().catch(console.error);
+        streams.push(stream);
     });
+    room.on("peerLeave", (peerId) => {
+        streams.filter(stream => stream.peerId = peerId);
 
-
+    });
 }
+
 async function shareCam() {
-    await navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-        .then(stream => {
-            document.getElementById('srcvdo').srcObject = stream;
-            room.replaceStream(stream);
-        })
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const videoInputDevice = devices.find(
+        (device) => device.kind === "videoinput"
+    );
+    const audioInputDevice = devices.find(
+        (device) => device.kind === "audioinput"
+    );
+    const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+            deviceId: videoInputDevice.deviceId,
+        },
+        audio: {
+            deviceId: audioInputDevice.deviceId,
+        }
+    });
+    document.getElementById('srcvdo').srcObject = stream;
+    room.replaceStream(stream);
 }
 
 async function shareScreen() {
