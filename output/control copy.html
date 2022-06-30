@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>control</title>
+    <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.4.js"></script>
+    <script src="../main.js"></script>
+    <link href="../common.css" rel="stylesheet">
+    <style>
+        #control-panel {
+            position: relative;
+            float: left;
+            width: calc( 100% - 300px);
+            height: 100%;
+        }
+        
+        #preview-panel {
+            float: right;
+            width: 300px;
+            height: 100%;
+        }
+        
+        #preview-panel video {
+            height: auto;
+        }
+        
+        .scrollable {
+            overflow-y: scroll;
+        }
+        
+        #option {
+            width: 100%;
+            height: 200px;
+            padding: 24px;
+            background-color: rgb( 16, 32, 48);
+        }
+        
+        #option-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .row {
+            height: 48px;
+        }
+        
+        .row * {
+            display: inline;
+        }
+        
+        input[type=number] {
+            width: 75px;
+            padding: 8px;
+        }
+        
+        input[type=color] {
+            width: 100px;
+            padding: 16px;
+        }
+        
+        .scene-item {
+            background-color: rgb( 16, 32, 48);
+            border-bottom: 1px solid rgb(255, 255, 255);
+        }
+        
+        #scene {
+            height: calc( 100% - 266px);
+            border: 1px solid rgb(255, 255, 255);
+        }
+        
+        #scene-toolbar {
+            height: 30px;
+        }
+        
+        #scene-items {
+            height: calc( 100% - 30px);
+        }
+        
+        #top {
+            height: 50px;
+        }
+        
+        #top * {
+            display: inline;
+        }
+        
+        @media screen and ( max-width: 960px) {
+            html,
+            body {
+                overflow: visible;
+            }
+            #main {
+                height: max-content;
+            }
+            #control-panel {
+                float: none;
+                width: 100%;
+            }
+            #preview-panel {
+                float: none;
+                width: 100%;
+                height: auto;
+            }
+        }
+        
+        #table-text {
+            float: left;
+        }
+        
+        #text-preview {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <div id="control-panel">
+            <div id="top">
+                <h2 class="">Join a room:</h2>
+                <input type="text" title="RoomName" id="room-name">
+                <input type="button" title="JoinRoom" value="join" id="btn-join">
+                <input type="button" title="LeaveRoom" value="leave" id="btn-leave">
+                <p id="connected" class="hide">connected</p>
+                <p id="disconnected" class="show">disconnected</p>
+            </div>
+            <div id="scene">
+                <div id="scene-toolbar">
+                    <input type="button" title="NewScene" id="btn-new" value="New">
+                    <input type="button" title="RemoveScene" id="btn-remove" value="Remove">
+                    <input type="button" title="EditScene" id="btn-edit" value="Edit">
+                </div>
+                <div id="scene-items" class="scrollable">
+                    <div class="scene-item">
+                    </div>
+                    <div class="scene-item">
+                    </div>
+                </div>
+            </div>
+            <div id="option" class="absolute bottom">
+                <h2>Scene Option</h2>
+                <div id="option-inner" class="scrollable relative">
+                    <div>
+                        <div class="row">
+                            <p>Name:</p>
+                            <input type="text" title="SceneName" value="Scene">
+                        </div>
+                        <div class="row">
+                            <p>Output Video:</p>
+                            <select title="Streams" id="streams">
+                                
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <table id="table-text">
+                            <thead>
+                                <tr>
+                                    <th>Position</th>
+                                    <th>Text</th>
+                                    <th>Size</th>
+                                    <th>TextColor</th>
+                                    <th>Border</th>
+                                    <th>BorderColor</th>
+                                    <th><input type="button" title="NewText" id="btn-newtext" value="New"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div id="text-preview">text</div>
+                    </div>
+                    <input type="button" title="Save" value="Save" id="btn-save" class="bottom right">
+                </div>
+            </div>
+        </div>
+        <div id="preview-panel">
+
+        </div>
+    </main>
+
+    <script>
+        const txtTable = document.getElementById('table-text');
+        document.getElementById('btn-join').onclick = () => {
+            join(document.getElementById('room-name').value);
+        };
+        document.getElementById('btn-leave').onclick = () => {
+            room.close();
+        };
+
+        document.getElementById('btn-newtext').onclick = () => {
+            const row = txtTable.insertRow();
+        }
+    </script>
+</body>
+
+</html>

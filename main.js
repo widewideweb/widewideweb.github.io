@@ -24,15 +24,23 @@ function join(roomName, localStream) {
     room.on("stream", async(stream) => {
         // ピアのvideo要素の追加
         const newVideoPanel = document.createElement("div");
+        newVideoPanel.style.backgroundColor = "rgb(16,32,64)";
         newVideoPanel.textContent = stream.peerId;
+        newVideoPanel.style.width = "100%";
+        newVideoPanel.style.height = "200px";
         const newVideo = document.createElement("video");
         newVideo.srcObject = stream;
         newVideo.playsInline = true;
+        newVideo.style.height = "calc( 200px - 1rem)";
+        newVideo.style.width = "100%";
         newVideo.classList.add("preview");
         newVideoPanel.appendChild(newVideo);
-        document.getElementById('preview-panel').appendChild(newVideoPanel);
+        document.getElementById('streams').appendChild(newVideoPanel);
         await newVideo.play().catch(console.error);
         streams.push(stream);
+        newVideoPanel.onclick = () => {
+            window.opener.document.getElementById('outvdo').srcObject = stream;
+        }
     });
     room.on("peerLeave", (peerId) => {
         streams.filter(stream => stream.peerId = peerId);
@@ -51,17 +59,27 @@ async function shareCam() {
     const stream = await navigator.mediaDevices.getUserMedia({
         video: {
             deviceId: videoInputDevice.deviceId,
+            width: 1920,
+            height: 1080,
         },
         audio: {
             deviceId: audioInputDevice.deviceId,
         }
+
     });
     document.getElementById('srcvdo').srcObject = stream;
     room.replaceStream(stream);
 }
 
 async function shareScreen() {
-    localStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true })
+    localStream = await navigator.mediaDevices.getDisplayMedia({
+            video: {
+                width: 1920,
+                height: 1080,
+                cursor: 'never',
+            },
+            audio: true,
+        })
         .then(stream => {
             document.getElementById('srcvdo').srcObject = stream;
             room.replaceStream(stream);
