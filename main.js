@@ -13,13 +13,13 @@ function join(roomName, localStream) {
         stream: localStream,
     });
     room.on("open", () => {
-        document.getElementById('connected').classList.remove("hide");
-        document.getElementById('disconnected').classList.add("hide");
+        document.getElementById("connected").classList.remove("hide");
+        document.getElementById("disconnected").classList.add("hide");
     });
 
     room.on("close", () => {
-        document.getElementById('connected').classList.add("hide");
-        document.getElementById('disconnected').classList.remove("hide");
+        document.getElementById("connected").classList.add("hide");
+        document.getElementById("disconnected").classList.remove("hide");
     })
     room.on("stream", async(stream) => {
         // ピアのvideo要素の追加
@@ -35,11 +35,11 @@ function join(roomName, localStream) {
         newVideo.style.width = "100%";
         newVideo.classList.add("preview");
         newVideoPanel.appendChild(newVideo);
-        document.getElementById('streams').appendChild(newVideoPanel);
+        document.getElementById("streams").appendChild(newVideoPanel);
         await newVideo.play().catch(console.error);
         streams.push(stream);
         newVideoPanel.onclick = () => {
-            window.opener.document.getElementById('outvdo').srcObject = stream;
+            window.opener.document.getElementById("outvdo").srcObject = stream;
         }
     });
     room.on("peerLeave", (peerId) => {
@@ -67,7 +67,7 @@ async function shareCam() {
         }
 
     });
-    document.getElementById('srcvdo').srcObject = stream;
+    document.getElementById("srcvdo").srcObject = stream;
     room.replaceStream(stream);
 }
 
@@ -76,12 +76,12 @@ async function shareScreen() {
             video: {
                 width: 1920,
                 height: 1080,
-                cursor: 'never',
+                cursor: "never",
             },
             audio: true,
         })
         .then(stream => {
-            document.getElementById('srcvdo').srcObject = stream;
+            document.getElementById("srcvdo").srcObject = stream;
             room.replaceStream(stream);
         });
 }

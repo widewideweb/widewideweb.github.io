@@ -229,9 +229,9 @@
     </main>
 
     <script>
-        var txtTable = document.getElementById('tbody-text');
+        var txtTable = document.getElementById("tbody-text");
 
-        var outvdo = window.opener.document.getElementById('outvdo');
+        var outvdo = window.opener.document.getElementById("outvdo");
 
         function switchVisible() {
             const text = window.opener.document.getElementById("user-text" + event.target.parentElement.parentElement.rowIndex);
@@ -251,14 +251,14 @@
         function textLoad(index) {
             var t = event.target.previousElementSibling;
             t.value = t.getAttribute("value");
-            const newElm = window.opener.document.createElement('p');
-            newElm.setAttribute('id', 'user-text' + index);
-            newElm.setAttribute('class', 'absolute');
-            window.opener.document.getElementById('outvdo-panel').appendChild(newElm);
+            const newElm = window.opener.document.createElement("p");
+            newElm.setAttribute("id", "user-text" + index);
+            newElm.setAttribute("class", "absolute");
+            window.opener.document.getElementById("outvdo-panel").appendChild(newElm);
         };
 
         function textSave() {
-            window.opener.document.getElementById('user-text' + event.target.parentElement.parentElement.rowIndex).textContent = event.target.value;
+            window.opener.document.getElementById("user-text" + event.target.parentElement.parentElement.rowIndex).textContent = event.target.value;
             event.target.setAttribute("value", event.target.value);
         };
 
@@ -273,7 +273,7 @@
 
         function newText() {
             const row = txtTable.insertRow();
-            var scr = document.createElement('script');
+            var scr = document.createElement("script");
             scr.textContent = `textLoad(${row.rowIndex});`;
             var itext = document.createElement("input");
             itext.type = "text";
@@ -311,10 +311,10 @@
 
         };
 
-        document.getElementById('btn-join').onclick = () => {
-            join(document.getElementById('room-name').value);
+        document.getElementById("btn-join").onclick = () => {
+            join(document.getElementById("room-name").value);
         };
-        document.getElementById('btn-leave').onclick = () => {
+        document.getElementById("btn-leave").onclick = () => {
             room.close();
         };
 
@@ -325,10 +325,10 @@
         function loadText() {
             if (localStorage.getItem("textTable")) {
                 txtTable.outerHTML = '<tbody id="tbody-text"></tbody>';
-                txtTable = document.getElementById('tbody-text');
+                txtTable = document.getElementById("tbody-text");
                 txtTable.outerHTML = localStorage.getItem("textTable");
             }
-            txtTable = document.getElementById('tbody-text');
+            txtTable = document.getElementById("tbody-text");
         }
     </script>
 </body>

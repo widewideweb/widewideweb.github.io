@@ -112,19 +112,19 @@
     <script>
         shareCam();
 
-        document.getElementById('btn-cam').onclick = () => {
+        document.getElementById("btn-cam").onclick = () => {
             shareCam();
         };
 
-        document.getElementById('btn-screen').onclick = () => {
+        document.getElementById("btn-screen").onclick = () => {
             shareScreen();
         };
 
-        document.getElementById('btn-join').onclick = () => {
-            join(document.getElementById('room-name').value, new MediaStream());
+        document.getElementById("btn-join").onclick = () => {
+            join(document.getElementById("room-name").value, new MediaStream());
         };
 
-        document.getElementById('btn-leave').onclick = () => {
+        document.getElementById("btn-leave").onclick = () => {
             room.close();
         };
     </script>
